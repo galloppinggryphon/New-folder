@@ -27,18 +27,8 @@ import './dark-theme.css';
 import { useEffect, useRef, useState } from "react";
 import { debounce } from "./utils";
 
-
 // @ts-expect-error VSCode global
 const vscode = acquireVsCodeApi();
-
-ReactDOM.render(<Editor vscode={vscode} />, document.getElementById("app"));
-
-// const Sep = () => <>{' ⁞ '}</>; // ¦⁝
-
-function Sep(){
-  return <span style={{fontSize: '1.5em', paddingBottom: '0.1em'}}>{' ⁝ '}</span>;
-};
-
 
 function Editor({vscode}: {vscode: any}) {
     const editorText = vscode.getState()?.markdown || "X";
@@ -81,7 +71,7 @@ function Editor({vscode}: {vscode: any}) {
     }, []);
 
 
-    return (
+    return (<div style={{marginTop: '15px'}}>
       <MDXEditor
         ref={mdxRef}
         className="dark-theme dark-editor"
@@ -114,5 +104,11 @@ function Editor({vscode}: {vscode: any}) {
           })
         ]}
       />
-    );
+    </div>);
 }
+
+function Sep(){
+  return <span style={{fontSize: '1.5em', padding: '0 0.5em 0.1em 0.5em', opacity: 0.5}}>{'⁝'}</span>;
+};
+
+ReactDOM.render(<Editor vscode={vscode} />, document.getElementById("app"));
