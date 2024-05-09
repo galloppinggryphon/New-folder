@@ -1,0 +1,63 @@
+{
+  "name": "mdx-editor",
+  "displayName": "MDX Editor",
+  "description": "",
+  "version": "0.0.2",
+  "repository": {
+    "url": "x"
+  },
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "mdxEditor.markdownEditor",
+        "displayName": "Markdown Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          }
+        ],
+        "priority": "default"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run esbuild-client && npm run esbuild-extension",
+    "esbuild-extension": "esbuild ./src/extension.ts --bundle --minify --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild-client": "esbuild ./src/editor.tsx --bundle  --minify --outfile=out/editor.js",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "npm run build",
+    "test": "jest",
+    "pretest": "npm run compile && npm run lint",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@mdxeditor/editor": "^3.0.5",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9",
+    "esbuild": "0.21.1",
+    "eslint": "^8.57.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
